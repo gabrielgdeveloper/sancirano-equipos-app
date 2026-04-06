@@ -1,0 +1,100 @@
+// Prisma schema — SQLite para desarrollo, fácil migrar a PostgreSQL
+// Para PostgreSQL: cambiar provider a "postgresql" y DATABASE_URL en .env
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tournament {
+  id        Int      @id
+  slug      String   @unique
+  name      String
+  alias     String   @default("")
+  seasonId  Int
+  seasonName String
+  closed    Boolean  @default(false)
+  syncedAt  DateTime @default(now())
+
+  teams     Team[]
+  rounds    Round[]
+  standings Standing[]
+}
+
+model Club {
+  id       Int    @id
+  name     String
+  imageUri String @default("")
+
+  teams    Team[]
+}
+
+model Team {
+  id           Int    @id
+  name         String
+  clubId       Int
+  tournamentId Int
+
+  club         Club       @relation(fields: [clubId], references: [id])
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  localMatches  Match[]    @relation("LocalTeam")
+  visitMatches  Match[]    @relation("VisitTeam")
+  standings    Standing[]
+}
+
+model Round {
+  id           Int      @id
+  name         String
+  playoffs     Boolean  @default(false)
+  playdate     DateTime
+  tournamentId Int
+
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  matches      Match[]
+}
+
+model Match {
+  id                      Int      @id
+  localTeamId             Int
+  visitTeamId             Int
+  roundId                 Int
+  playdate                DateTime
+  fulfilled               Boolean  @default(false)
+  suspended               Boolean  @default(false)
+  localTeamScore          Int      @default(0)
+  visitTeamScore          Int      @default(0)
+  localTeamOffensiveBonus Int      @default(0)
+  visitTeamOffensiveBonus Int      @default(0)
+  localTeamDefensiveBonus Int      @default(0)
+  visitTeamDefensiveBonus Int      @default(0)
+  videoUrl                String   @default("")
+
+  localTeam   Team   @relation("LocalTeam", fields: [localTeamId], references: [id])
+  visitTeam   Team   @relation("VisitTeam", fields: [visitTeamId], references: [id])
+  round       Round  @relation(fields: [roundId], references: [id])
+}
+
+model Standing {
+  id              Int      @id
+  tournamentId    Int
+  teamId          Int
+  position        Int
+  played          Int      @default(0)
+  won             Int      @default(0)
+  tied            Int      @default(0)
+  lost            Int      @default(0)
+  pointsFavor     Int      @default(0)
+  pointsAgainst   Int      @default(0)
+  bonusOffensive  Int      @default(0)
+  bonusDefensive  Int      @default(0)
+  pointsTotal     Int      @default(0)
+  champion        Boolean  @default(false)
+  updatedAt       DateTime @updatedAt
+
+  tournament  Tournament @relation(fields: [tournamentId], references: [id])
+  team        Team       @relation(fields: [teamId], references: [id])
+}
