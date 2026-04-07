@@ -15,7 +15,7 @@ export function TournamentSelector({ current }: TournamentSelectorProps) {
 
   return (
     <div className="flex items-center gap-3">
-      <label htmlFor="tournament-select" className="text-sm text-gray-400 whitespace-nowrap">
+      <label htmlFor="tournament-select" className="hidden sm:block text-sm text-gray-400 whitespace-nowrap">
         Torneo:
       </label>
       <select
