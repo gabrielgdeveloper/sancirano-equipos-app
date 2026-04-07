@@ -36,9 +36,9 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
         {/* Local */}
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <TeamBadge imageUrl={localTeam.club.imageUrl} name={localTeam.club.name} size="xs" />
+            <TeamBadge imageUrl={localTeam.club.imageUrl} name={localTeam.name} size="xs" />
             <span className={clsx("text-sm font-medium truncate", localHighlight ? "text-brand-400" : "text-gray-200")}>
-              {localTeam.club.name}
+              {localTeam.name}
             </span>
           </div>
           <span className={clsx("text-lg font-bold tabular-nums flex-shrink-0", localHighlight ? "text-brand-400" : "text-white")}>
@@ -49,9 +49,9 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
         {/* Visitante */}
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <TeamBadge imageUrl={visitTeam.club.imageUrl} name={visitTeam.club.name} size="xs" />
+            <TeamBadge imageUrl={visitTeam.club.imageUrl} name={visitTeam.name} size="xs" />
             <span className={clsx("text-sm font-medium truncate", visitHighlight ? "text-brand-400" : "text-gray-200")}>
-              {visitTeam.club.name}
+              {visitTeam.name}
             </span>
           </div>
           <span className={clsx("text-lg font-bold tabular-nums flex-shrink-0", visitHighlight ? "text-brand-400" : "text-white")}>
@@ -78,9 +78,9 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
       <div className="hidden sm:flex items-center justify-between gap-2">
         {/* Local */}
         <div className={clsx("flex items-center gap-2 flex-1 min-w-0", compact ? "flex-col text-center" : "")}>
-          <TeamBadge imageUrl={localTeam.club.imageUrl} name={localTeam.club.name} size={compact ? "xs" : "sm"} />
+          <TeamBadge imageUrl={localTeam.club.imageUrl} name={localTeam.name} size={compact ? "xs" : "sm"} />
           <span className={clsx("text-sm font-medium leading-tight truncate", localHighlight ? "text-brand-400" : "text-gray-200")}>
-            {localTeam.club.name}
+            {localTeam.name}
           </span>
         </div>
 
@@ -116,9 +116,9 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
         {/* Visitante */}
         <div className={clsx("flex items-center gap-2 flex-1 min-w-0 justify-end", compact ? "flex-col-reverse text-center" : "")}>
           <span className={clsx("text-sm font-medium leading-tight truncate text-right", visitHighlight ? "text-brand-400" : "text-gray-200")}>
-            {visitTeam.club.name}
+            {visitTeam.name}
           </span>
-          <TeamBadge imageUrl={visitTeam.club.imageUrl} name={visitTeam.club.name} size={compact ? "xs" : "sm"} />
+          <TeamBadge imageUrl={visitTeam.club.imageUrl} name={visitTeam.name} size={compact ? "xs" : "sm"} />
         </div>
       </div>
     </div>

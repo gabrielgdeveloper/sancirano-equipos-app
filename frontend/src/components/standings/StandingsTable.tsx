@@ -62,7 +62,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                 <div className="flex items-center gap-2">
                   <TeamBadge
                     imageUrl={row.team.club.imageUrl}
-                    name={row.team.club.name}
+                    name={row.team.name}
                     size="xs"
                   />
                   <span
@@ -71,7 +71,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                       row.isTracked ? "text-brand-300" : "text-gray-200"
                     )}
                   >
-                    {row.team.club.name}
+                    {row.team.name}
                     {row.champion && (
                       <span className="ml-1 text-yellow-400" title="Campeón">
                         ★
