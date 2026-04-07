@@ -18,7 +18,7 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
   return (
     <div
       className={clsx(
-        "bg-surface-700 rounded-xl p-4 flex flex-col gap-3 border",
+        "bg-surface-700 rounded-xl p-3 flex flex-col gap-2 border",
         fulfilled ? "border-surface-500" : "border-surface-600",
         suspended && "opacity-60"
       )}
@@ -26,33 +26,60 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
       {/* Fecha y estado */}
       <div className="flex items-center justify-between text-xs text-gray-500">
         <span>{formatMatchDate(playdate)}</span>
-        {suspended && (
-          <span className="text-yellow-400 font-medium">Suspendido</span>
-        )}
-        {!fulfilled && !suspended && (
-          <span className="text-gray-500">Pendiente</span>
-        )}
-        {fulfilled && (
-          <span className="text-emerald-400 font-medium">Jugado</span>
+        {suspended && <span className="text-yellow-400 font-medium">Suspendido</span>}
+        {!fulfilled && !suspended && <span className="text-gray-500">Pendiente</span>}
+        {fulfilled && <span className="text-emerald-400 font-medium">Jugado</span>}
+      </div>
+
+      {/* Equipos y marcador — layout vertical en mobile, horizontal en sm+ */}
+      <div className="flex flex-col gap-1 sm:hidden">
+        {/* Local */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            <TeamBadge imageUrl={localTeam.club.imageUrl} name={localTeam.club.name} size="xs" />
+            <span className={clsx("text-sm font-medium truncate", localHighlight ? "text-brand-400" : "text-gray-200")}>
+              {localTeam.club.name}
+            </span>
+          </div>
+          <span className={clsx("text-lg font-bold tabular-nums flex-shrink-0", localHighlight ? "text-brand-400" : "text-white")}>
+            {fulfilled && score != null ? score.localScore : "–"}
+          </span>
+        </div>
+
+        {/* Visitante */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            <TeamBadge imageUrl={visitTeam.club.imageUrl} name={visitTeam.club.name} size="xs" />
+            <span className={clsx("text-sm font-medium truncate", visitHighlight ? "text-brand-400" : "text-gray-200")}>
+              {visitTeam.club.name}
+            </span>
+          </div>
+          <span className={clsx("text-lg font-bold tabular-nums flex-shrink-0", visitHighlight ? "text-brand-400" : "text-white")}>
+            {fulfilled && score != null ? score.visitScore : "–"}
+          </span>
+        </div>
+
+        {/* Bonus mobile */}
+        {fulfilled && score && (score.localOffensiveBonus > 0 || score.localDefensiveBonus > 0 || score.visitOffensiveBonus > 0 || score.visitDefensiveBonus > 0) && (
+          <div className="flex gap-3 text-xs mt-0.5 pl-9">
+            <span>
+              {score.localOffensiveBonus > 0 && <span className="text-brand-400">+{score.localOffensiveBonus}B</span>}
+              {score.localDefensiveBonus > 0 && <span className="text-emerald-400 ml-1">+{score.localDefensiveBonus}D</span>}
+            </span>
+            <span>
+              {score.visitOffensiveBonus > 0 && <span className="text-brand-400">+{score.visitOffensiveBonus}B</span>}
+              {score.visitDefensiveBonus > 0 && <span className="text-emerald-400 ml-1">+{score.visitDefensiveBonus}D</span>}
+            </span>
+          </div>
         )}
       </div>
 
-      {/* Equipos y marcador */}
-      <div className="flex items-center justify-between gap-2">
+      {/* Layout horizontal — solo sm+ */}
+      <div className="hidden sm:flex items-center justify-between gap-2">
         {/* Local */}
         <div className={clsx("flex items-center gap-2 flex-1 min-w-0", compact ? "flex-col text-center" : "")}>
-          <TeamBadge
-            imageUrl={localTeam.club.imageUrl}
-            name={localTeam.club.name}
-            size={compact ? "sm" : "sm"}
-          />
-          <span
-            className={clsx(
-              "text-sm font-medium leading-tight truncate",
-              localHighlight ? "text-brand-400" : "text-gray-200",
-              compact ? "text-xs" : ""
-            )}
-          >
+          <TeamBadge imageUrl={localTeam.club.imageUrl} name={localTeam.club.name} size={compact ? "xs" : "sm"} />
+          <span className={clsx("text-sm font-medium leading-tight truncate", localHighlight ? "text-brand-400" : "text-gray-200")}>
             {localTeam.club.name}
           </span>
         </div>
@@ -61,36 +88,24 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
         <div className="flex-shrink-0 text-center min-w-[80px]">
           {fulfilled && score ? (
             <div className="flex items-center justify-center gap-1">
-              <span
-                className={clsx(
-                  "text-2xl font-bold tabular-nums",
-                  localHighlight ? "text-brand-400" : "text-white"
-                )}
-              >
+              <span className={clsx("text-2xl font-bold tabular-nums", localHighlight ? "text-brand-400" : "text-white")}>
                 {score.localScore}
               </span>
               <span className="text-gray-500 text-lg">–</span>
-              <span
-                className={clsx(
-                  "text-2xl font-bold tabular-nums",
-                  visitHighlight ? "text-brand-400" : "text-white"
-                )}
-              >
+              <span className={clsx("text-2xl font-bold tabular-nums", visitHighlight ? "text-brand-400" : "text-white")}>
                 {score.visitScore}
               </span>
             </div>
           ) : (
             <span className="text-gray-600 text-sm font-medium">vs</span>
           )}
-
-          {/* Bonus */}
           {fulfilled && score && (
             <div className="flex items-center justify-center gap-3 mt-1 text-xs text-gray-500">
-              <span title="Bonus ofensivo/defensivo local">
+              <span>
                 {score.localOffensiveBonus > 0 && <span className="text-brand-400">+{score.localOffensiveBonus}B</span>}
                 {score.localDefensiveBonus > 0 && <span className="text-emerald-400 ml-1">+{score.localDefensiveBonus}D</span>}
               </span>
-              <span title="Bonus ofensivo/defensivo visitante">
+              <span>
                 {score.visitOffensiveBonus > 0 && <span className="text-brand-400">+{score.visitOffensiveBonus}B</span>}
                 {score.visitDefensiveBonus > 0 && <span className="text-emerald-400 ml-1">+{score.visitDefensiveBonus}D</span>}
               </span>
@@ -100,20 +115,10 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
 
         {/* Visitante */}
         <div className={clsx("flex items-center gap-2 flex-1 min-w-0 justify-end", compact ? "flex-col-reverse text-center" : "")}>
-          <span
-            className={clsx(
-              "text-sm font-medium leading-tight truncate text-right",
-              visitHighlight ? "text-brand-400" : "text-gray-200",
-              compact ? "text-xs" : ""
-            )}
-          >
+          <span className={clsx("text-sm font-medium leading-tight truncate text-right", visitHighlight ? "text-brand-400" : "text-gray-200")}>
             {visitTeam.club.name}
           </span>
-          <TeamBadge
-            imageUrl={visitTeam.club.imageUrl}
-            name={visitTeam.club.name}
-            size={compact ? "sm" : "sm"}
-          />
+          <TeamBadge imageUrl={visitTeam.club.imageUrl} name={visitTeam.club.name} size={compact ? "xs" : "sm"} />
         </div>
       </div>
     </div>
