@@ -9,7 +9,7 @@ import type { TournamentDataProvider, TournamentDataResult } from "./TournamentD
  * La diferencia la marca el header de respuesta o el campo `source` en el JSON.
  */
 export class DbTournamentDataProvider implements TournamentDataProvider {
-  async getChampionship(id: number, trackedTeamName: string): Promise<TournamentDataResult> {
+  async getChampionship(id: number, trackedTeamName: string, trackedTeamId?: number): Promise<TournamentDataResult> {
     const [championshipResponse, positionsResponse] = await Promise.all([
       fetchChampionship(id),
       fetchPositions(id),
@@ -17,7 +17,7 @@ export class DbTournamentDataProvider implements TournamentDataProvider {
 
     return {
       championship: mapChampionshipResponse(championshipResponse),
-      standings: mapStandingsResponse(positionsResponse, trackedTeamName),
+      standings: mapStandingsResponse(positionsResponse, trackedTeamName, trackedTeamId),
       source: "db",
       lastSync: (positionsResponse as any).lastSync ?? null,
     };

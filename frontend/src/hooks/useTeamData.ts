@@ -12,12 +12,13 @@ import { getTrackedTeamStanding } from "@/utils/standingsHelpers";
 export function useTeamStats(
   championship: Championship | undefined,
   standings: StandingRow[] | undefined,
-  trackedTeamName: string
+  trackedTeamName: string,
+  trackedTeamId?: number
 ): TeamStats | null {
   return useMemo(() => {
     if (!championship) return null;
 
-    const team = findTrackedTeam(championship, trackedTeamName);
+    const team = findTrackedTeam(championship, trackedTeamName, trackedTeamId);
     if (!team) return null;
 
     const allTeamMatches = getTeamMatches(championship, team.id);
@@ -35,5 +36,5 @@ export function useTeamStats(
       lastMatch,
       nextMatch,
     };
-  }, [championship, standings, trackedTeamName]);
+  }, [championship, standings, trackedTeamName, trackedTeamId]);
 }

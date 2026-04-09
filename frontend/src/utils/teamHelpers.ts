@@ -18,9 +18,13 @@ export function teamNameMatches(teamName: string, target: string): boolean {
 
 /**
  * Encuentra el equipo seguido (ej: San Cirano) dentro del campeonato.
- * Busca en la lista de equipos del campeonato.
+ * Si se proporciona trackedTeamId, busca por ID exacto (necesario cuando hay 2+ equipos del mismo club).
+ * Si no, busca por nombre.
  */
-export function findTrackedTeam(championship: Championship, trackedTeamName: string): Team | null {
+export function findTrackedTeam(championship: Championship, trackedTeamName: string, trackedTeamId?: number): Team | null {
+  if (trackedTeamId != null) {
+    return championship.teams.find((t) => t.id === trackedTeamId) ?? null;
+  }
   return (
     championship.teams.find((t) =>
       teamNameMatches(t.club.name, trackedTeamName) || teamNameMatches(t.name, trackedTeamName)

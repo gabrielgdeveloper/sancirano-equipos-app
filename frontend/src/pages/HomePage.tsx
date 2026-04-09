@@ -32,7 +32,8 @@ export function HomePage() {
   const teamStats = useTeamStats(
     data?.championship,
     data?.standings,
-    tournament?.trackedTeamName ?? appConfig.trackedTeamName
+    tournament?.trackedTeamName ?? appConfig.trackedTeamName,
+    tournament?.trackedTeamId
   );
 
   // Persistir último torneo seleccionado

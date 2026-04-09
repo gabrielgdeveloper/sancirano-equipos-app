@@ -7,10 +7,10 @@ const STALE_TIME = 5 * 60 * 1000; // 5 minutos
 
 export function useTournamentData(tournament: TournamentConfig | undefined) {
   return useQuery<TournamentDataResult, Error>({
-    queryKey: ["tournament", tournament?.id],
+    queryKey: ["tournament", tournament?.slug],
     queryFn: () => {
       if (!tournament) throw new Error("Torneo no encontrado");
-      return tournamentDataProvider.getChampionship(tournament.id, tournament.trackedTeamName);
+      return tournamentDataProvider.getChampionship(tournament.id, tournament.trackedTeamName, tournament.trackedTeamId);
     },
     enabled: !!tournament,
     staleTime: STALE_TIME,

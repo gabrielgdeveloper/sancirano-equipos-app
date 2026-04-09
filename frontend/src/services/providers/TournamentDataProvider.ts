@@ -12,5 +12,5 @@ export interface TournamentDataResult {
  * Implementada por ApiTournamentDataProvider y DbTournamentDataProvider.
  */
 export interface TournamentDataProvider {
-  getChampionship(id: number, trackedTeamName: string): Promise<TournamentDataResult>;
+  getChampionship(id: number, trackedTeamName: string, trackedTeamId?: number): Promise<TournamentDataResult>;
 }
