@@ -16,12 +16,12 @@ export const tournaments: TournamentConfig[] = [
   { id: 2025203, slug: "pre-intermedia-e", name: "Pre-Intermedia E", trackedTeamName: "San Cirano", trackedTeamId: 202516951 },
   { id: 2025215, slug: "m19-a", name: "M19-A", trackedTeamName: "San Cirano" },
   { id: 2025216, slug: "m19-b", name: "M19-B", trackedTeamName: "San Cirano" },
-  { id: 2025216, slug: "m17-a", name: "M17-A", trackedTeamName: "San Cirano" },
-  { id: 2025216, slug: "m17-b", name: "M17-B", trackedTeamName: "San Cirano" },
-  { id: 2025216, slug: "m16-a", name: "M16-A", trackedTeamName: "San Cirano" },
-  { id: 2025216, slug: "m16-b", name: "M16-B", trackedTeamName: "San Cirano" },
-  { id: 2025216, slug: "m15-a", name: "M15-A", trackedTeamName: "San Cirano" },
-  { id: 2025216, slug: "m15-a", name: "M15-B", trackedTeamName: "San Cirano" },
+  { id: 2025233, slug: "m17-a", name: "M17-A", trackedTeamName: "San Cirano" },
+  { id: 2025234, slug: "m17-b", name: "M17-B", trackedTeamName: "San Cirano" },
+  { id: 2025243, slug: "m16-a", name: "M16-A", trackedTeamName: "San Cirano" },
+  { id: 2025244, slug: "m16-b", name: "M16-B", trackedTeamName: "San Cirano" },
+  { id: 2025259, slug: "m15-a", name: "M15-A", trackedTeamName: "San Cirano" },
+  { id: 2025260, slug: "m15-a", name: "M15-B", trackedTeamName: "San Cirano" },
 ];
 
 export function getTournamentBySlug(slug: string): TournamentConfig | undefined {
