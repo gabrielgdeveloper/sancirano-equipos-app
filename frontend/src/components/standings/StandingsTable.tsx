@@ -58,7 +58,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                     <span className="text-[9px] font-semibold text-emerald-400 uppercase leading-none">Ascenso</span>
                   )}
                   {showGanador && row.position >= 1 && row.position <= 6 && (
-                    <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">G</span>
+                    <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Ganadores</span>
                   )}
                   {((showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (
                     <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Playoff</span>
