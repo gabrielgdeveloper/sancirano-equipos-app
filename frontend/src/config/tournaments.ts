@@ -21,7 +21,7 @@ export const tournaments: TournamentConfig[] = [
   { id: 2025243, slug: "m16-a", name: "M16-A", trackedTeamName: "San Cirano" },
   { id: 2025244, slug: "m16-b", name: "M16-B", trackedTeamName: "San Cirano" },
   { id: 2025259, slug: "m15-a", name: "M15-A", trackedTeamName: "San Cirano" },
-  { id: 2025260, slug: "m15-a", name: "M15-B", trackedTeamName: "San Cirano" },
+  { id: 2025260, slug: "m15-b", name: "M15-B", trackedTeamName: "San Cirano" },
 ];
 
 export function getTournamentBySlug(slug: string): TournamentConfig | undefined {
