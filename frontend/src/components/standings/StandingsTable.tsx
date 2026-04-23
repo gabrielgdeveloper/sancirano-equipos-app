@@ -6,9 +6,10 @@ interface StandingsTableProps {
   standings: StandingRow[];
   compact?: boolean;
   showPromotion?: boolean;
+  showPlayoff?: boolean;
 }
 
-export function StandingsTable({ standings, compact = false, showPromotion = false }: StandingsTableProps) {
+export function StandingsTable({ standings, compact = false, showPromotion = false, showPlayoff = false }: StandingsTableProps) {
   return (
     <div className="overflow-x-auto rounded-xl border border-surface-600">
       <table className="w-full text-sm">
@@ -42,7 +43,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                   ? "bg-brand-500/10 border-l-brand-500"
                   : showPromotion && row.position === 1
                   ? "border-l-emerald-500 hover:bg-surface-700"
-                  : showPromotion && row.position >= 2 && row.position <= 5
+                  : (showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)
                   ? "border-l-yellow-500 hover:bg-surface-700"
                   : "border-l-transparent hover:bg-surface-700"
               )}
@@ -53,7 +54,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                   {showPromotion && row.position === 1 && (
                     <span className="text-[9px] font-semibold text-emerald-400 uppercase leading-none">Ascenso</span>
                   )}
-                  {showPromotion && row.position >= 2 && row.position <= 5 && (
+                  {((showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (
                     <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Playoff</span>
                   )}
                 </div>

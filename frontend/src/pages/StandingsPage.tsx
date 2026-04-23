@@ -28,7 +28,7 @@ export function StandingsPage() {
       </div>
 
       {standings.length > 0 ? (
-        <StandingsTable standings={standings} compact={false} showPromotion={slug === "primera"} />
+        <StandingsTable standings={standings} compact={false} showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} />
       ) : (
         <p className="text-gray-500 text-center py-12">No hay posiciones disponibles.</p>
       )}

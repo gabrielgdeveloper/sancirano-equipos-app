@@ -120,7 +120,7 @@ export function HomePage() {
               Ver completa →
             </a>
           </div>
-          <StandingsTable standings={standings} compact />
+          <StandingsTable standings={standings} compact showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} />
         </section>
       )}
     </div>
