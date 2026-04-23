@@ -8,18 +8,20 @@ import { getMatchResult } from "@/utils/teamHelpers";
 interface TeamSummaryCardProps {
   stats: TeamStats;
   tournamentSlug: string;
+  trackedTeamName?: string;
 }
 
-export function TeamSummaryCard({ stats, tournamentSlug }: TeamSummaryCardProps) {
+export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName }: TeamSummaryCardProps) {
   const { team, standing, lastMatch, nextMatch } = stats;
+  const displayName = trackedTeamName ?? team.club.name;
 
   return (
     <div className="bg-gradient-to-br from-brand-900/30 to-surface-700 rounded-2xl border border-brand-500/20 p-5 flex flex-col gap-5">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <TeamBadge imageUrl={team.club.imageUrl} name={team.club.name} size="lg" />
+        <TeamBadge imageUrl={team.club.imageUrl} name={displayName} size="lg" />
         <div>
-          <h2 className="text-xl font-bold text-white">{team.club.name}</h2>
+          <h2 className="text-xl font-bold text-white">{displayName}</h2>
           {standing && (
             <p className="text-brand-300 text-sm mt-0.5">
               {standing.position}° posición — {standing.pointsTotal} pts

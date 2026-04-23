@@ -80,7 +80,7 @@ export function HomePage() {
       {teamStats ? (
         <section>
           <h2 className="text-lg font-semibold text-white mb-3">San Cirano</h2>
-          <TeamSummaryCard stats={teamStats} tournamentSlug={slug} />
+          <TeamSummaryCard stats={teamStats} tournamentSlug={slug} trackedTeamName={tournament?.trackedTeamName} />
         </section>
       ) : (
         <div className="bg-surface-700 rounded-xl p-6 text-center text-gray-500">
