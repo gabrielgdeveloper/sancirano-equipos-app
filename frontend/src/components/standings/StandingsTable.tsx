@@ -7,9 +7,10 @@ interface StandingsTableProps {
   compact?: boolean;
   showPromotion?: boolean;
   showPlayoff?: boolean;
+  showGanador?: boolean;
 }
 
-export function StandingsTable({ standings, compact = false, showPromotion = false, showPlayoff = false }: StandingsTableProps) {
+export function StandingsTable({ standings, compact = false, showPromotion = false, showPlayoff = false, showGanador = false }: StandingsTableProps) {
   return (
     <div className="overflow-x-auto rounded-xl border border-surface-600">
       <table className="w-full text-sm">
@@ -41,7 +42,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                 "transition-colors border-l-2",
                 row.isTracked
                   ? "bg-brand-500/10 border-l-brand-500"
-                  : showPromotion && row.position === 1
+                  : (showPromotion || showGanador) && row.position === 1
                   ? "border-l-emerald-500 hover:bg-surface-700"
                   : (showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)
                   ? "border-l-yellow-500 hover:bg-surface-700"
@@ -53,6 +54,9 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                   <span>{row.position}</span>
                   {showPromotion && row.position === 1 && (
                     <span className="text-[9px] font-semibold text-emerald-400 uppercase leading-none">Ascenso</span>
+                  )}
+                  {showGanador && row.position === 1 && (
+                    <span className="text-[9px] font-semibold text-emerald-400 uppercase leading-none">G</span>
                   )}
                   {((showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (
                     <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Playoff</span>
