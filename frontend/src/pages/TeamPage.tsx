@@ -24,7 +24,8 @@ export function TeamPage() {
   const teamStats = useTeamStats(
     data?.championship,
     data?.standings,
-    tournament?.trackedTeamName ?? appConfig.trackedTeamName
+    tournament?.trackedTeamName ?? appConfig.trackedTeamName,
+    tournament?.trackedTeamId
   );
 
   if (isLoading) return <LoadingSpinner label="Cargando datos del equipo..." />;
