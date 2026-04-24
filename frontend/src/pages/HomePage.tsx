@@ -120,7 +120,7 @@ export function HomePage() {
               Ver completa →
             </a>
           </div>
-          <StandingsTable standings={standings} compact showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a"} />
+          <StandingsTable standings={standings} compact showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a"} />
         </section>
       )}
     </div>
