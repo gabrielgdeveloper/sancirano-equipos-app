@@ -16,6 +16,7 @@ export const tournaments: TournamentConfig[] = [
   { id: 2025203, slug: "pre-intermedia-e", name: "Pre-Intermedia E", trackedTeamName: "San Cirano Pre E", trackedTeamId: 202516950 },
   { id: 2025215, slug: "m19-a", name: "M19-A", trackedTeamName: "San Cirano M19-A" },
   { id: 2025216, slug: "m19-b", name: "M19-B", trackedTeamName: "San Cirano M19-B" },
+  { id: 2025229, slug: "m19-c", name: "M19-C", trackedTeamName: "San Cirano M19-C" },
   { id: 2025233, slug: "m17-a", name: "M17-A", trackedTeamName: "San Cirano M17-A" },
   { id: 2025234, slug: "m17-b", name: "M17-B", trackedTeamName: "San Cirano M17-B" },
   { id: 2025243, slug: "m16-a", name: "M16-A", trackedTeamName: "San Cirano M16-A" },
