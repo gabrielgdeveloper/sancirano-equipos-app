@@ -18,6 +18,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
           <tr className="bg-surface-700 text-gray-400 text-xs uppercase tracking-wider">
             <th className="px-3 py-3 text-left w-8">#</th>
             <th className="px-3 py-3 text-left">Equipo</th>
+            <th className="px-3 py-3 text-center font-bold text-white">Pts</th>
             <th className="px-3 py-3 text-center">PJ</th>
             <th className="px-3 py-3 text-center">G</th>
             <th className="px-3 py-3 text-center">E</th>
@@ -31,7 +32,6 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                 <th className="px-3 py-3 text-center">BD</th>
               </>
             )}
-            <th className="px-3 py-3 text-center font-bold text-white">Pts</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-surface-600">
@@ -87,6 +87,14 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                   </span>
                 </div>
               </td>
+              <td
+                className={clsx(
+                  "px-3 py-3 text-center text-base font-bold",
+                  row.isTracked ? "text-brand-300" : "text-white"
+                )}
+              >
+                {row.pointsTotal}
+              </td>
               <td className="px-3 py-3 text-center text-gray-300">{row.played}</td>
               <td className="px-3 py-3 text-center text-emerald-400 font-medium">{row.won}</td>
               <td className="px-3 py-3 text-center text-yellow-400">{row.tied}</td>
@@ -107,14 +115,6 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                   <td className="px-3 py-3 text-center text-gray-400">{row.bonusDefensive}</td>
                 </>
               )}
-              <td
-                className={clsx(
-                  "px-3 py-3 text-center text-base font-bold",
-                  row.isTracked ? "text-brand-300" : "text-white"
-                )}
-              >
-                {row.pointsTotal}
-              </td>
             </tr>
           ))}
         </tbody>
