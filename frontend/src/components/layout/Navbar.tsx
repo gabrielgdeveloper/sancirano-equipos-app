@@ -11,13 +11,14 @@ export function Navbar({ currentTournament }: NavbarProps) {
   const location = useLocation();
   const slug = currentTournament?.slug;
 
-  const navLinks = slug
+  const slugLinks = slug
     ? [
         { to: `/torneo/${slug}`, label: "Inicio" },
         { to: `/torneo/${slug}/equipo/san-cirano`, label: "San Cirano" },
         { to: `/torneo/${slug}/posiciones`, label: "Posiciones" },
       ]
     : [];
+  const navLinks = [...slugLinks, { to: "/ultimos-resultados", label: "Resultados" }];
 
   return (
     <header className="sticky top-0 z-50 bg-surface-800/90 backdrop-blur-sm border-b border-surface-600">

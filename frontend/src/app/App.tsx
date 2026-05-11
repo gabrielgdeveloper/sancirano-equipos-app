@@ -5,6 +5,7 @@ import { Layout } from "@/components/layout/Layout";
 import { HomePage } from "@/pages/HomePage";
 import { TeamPage } from "@/pages/TeamPage";
 import { StandingsPage } from "@/pages/StandingsPage";
+import { LastResultsPage } from "@/pages/LastResultsPage";
 import { defaultTournament } from "@/config/tournaments";
 
 const queryClient = new QueryClient({
@@ -40,6 +41,8 @@ export function App() {
             <Route path="/torneo/:slug/equipo/:teamSlug" element={<TeamPage />} />
             {/* Tabla de posiciones */}
             <Route path="/torneo/:slug/posiciones" element={<StandingsPage />} />
+            {/* Últimos resultados de todas las divisiones */}
+            <Route path="/ultimos-resultados" element={<LastResultsPage />} />
           </Route>
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />

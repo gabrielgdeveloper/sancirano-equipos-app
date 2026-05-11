@@ -10,12 +10,11 @@ export function BottomNav({ currentTournament }: BottomNavProps) {
   const location = useLocation();
   const slug = currentTournament?.slug;
 
-  if (!slug) return null;
-
   const navLinks = [
     { to: `/torneo/${slug}`, label: "Inicio", icon: HomeIcon },
     { to: `/torneo/${slug}/equipo/san-cirano`, label: "San Cirano", icon: ShieldIcon },
     { to: `/torneo/${slug}/posiciones`, label: "Posiciones", icon: ListIcon },
+    { to: "/ultimos-resultados", label: "Resultados", icon: ResultsIcon },
   ];
 
   return (
@@ -98,6 +97,26 @@ function ListIcon({ active }: { active: boolean }) {
       <line x1="3" y1="6" x2="3.01" y2="6" />
       <line x1="3" y1="12" x2="3.01" y2="12" />
       <line x1="3" y1="18" x2="3.01" y2="18" />
+    </svg>
+  );
+}
+
+function ResultsIcon({ active }: { active: boolean }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={active ? "2.5" : "2"}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <line x1="3" y1="9" x2="21" y2="9" />
+      <line x1="12" y1="9" x2="12" y2="21" />
     </svg>
   );
 }
