@@ -5,9 +5,10 @@ interface RoundSectionProps {
   round: Round;
   highlightTeamId?: number;
   compact?: boolean;
+  showHorarioInvertido?: boolean;
 }
 
-export function RoundSection({ round, highlightTeamId, compact = false }: RoundSectionProps) {
+export function RoundSection({ round, highlightTeamId, compact = false, showHorarioInvertido = false }: RoundSectionProps) {
   return (
     <section>
       <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
@@ -20,6 +21,7 @@ export function RoundSection({ round, highlightTeamId, compact = false }: RoundS
             match={match}
             highlightTeamId={highlightTeamId}
             compact={compact}
+            showHorarioInvertido={showHorarioInvertido}
           />
         ))}
       </div>

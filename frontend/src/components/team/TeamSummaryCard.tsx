@@ -9,9 +9,10 @@ interface TeamSummaryCardProps {
   stats: TeamStats;
   tournamentSlug: string;
   trackedTeamName?: string;
+  showHorarioInvertido?: boolean;
 }
 
-export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName }: TeamSummaryCardProps) {
+export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName, showHorarioInvertido = false }: TeamSummaryCardProps) {
   const { team, standing, lastMatch, nextMatch } = stats;
   const displayName = trackedTeamName ?? team.club.name;
 
@@ -52,7 +53,7 @@ export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName }: Team
         {lastMatch && (
           <div>
             <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Último partido</p>
-            <MatchCard match={lastMatch} highlightTeamId={team.id} compact />
+            <MatchCard match={lastMatch} highlightTeamId={team.id} compact showHorarioInvertido={showHorarioInvertido} />
             {(() => {
               const result = getMatchResult(lastMatch, team.id);
               const resultMap = { won: "Victoria", lost: "Derrota", tied: "Empate" };
@@ -72,7 +73,7 @@ export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName }: Team
         {nextMatch && (
           <div>
             <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Próximo partido</p>
-            <MatchCard match={nextMatch} highlightTeamId={team.id} compact />
+            <MatchCard match={nextMatch} highlightTeamId={team.id} compact showHorarioInvertido={showHorarioInvertido} />
           </div>
         )}
       </div>

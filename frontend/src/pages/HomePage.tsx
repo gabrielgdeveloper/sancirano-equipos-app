@@ -55,6 +55,10 @@ export function HomePage() {
   const nextRound = getNextRound(championship);
   const trackedTeamId = teamStats?.team.id;
 
+  const showHorarioInvertido =
+    tournament?.sport === "hockey" &&
+    (slug?.startsWith("hockey-primera") || slug?.startsWith("hockey-intermedia"));
+
   async function handleSync() {
     if (!tournament) return;
     if (tournament.sport === "hockey") {
@@ -93,7 +97,7 @@ export function HomePage() {
       {teamStats ? (
         <section>
           <h2 className="text-lg font-semibold text-white mb-3">San Cirano</h2>
-          <TeamSummaryCard stats={teamStats} tournamentSlug={slug} trackedTeamName={tournament?.trackedTeamName} />
+          <TeamSummaryCard stats={teamStats} tournamentSlug={slug} trackedTeamName={tournament?.trackedTeamName} showHorarioInvertido={showHorarioInvertido} />
         </section>
       ) : (
         <div className="bg-surface-700 rounded-xl p-6 text-center text-gray-500">
@@ -107,7 +111,7 @@ export function HomePage() {
           <h2 className="text-lg font-semibold text-white mb-3">
             Última fecha — {lastRound.name}
           </h2>
-          <RoundSection round={lastRound} highlightTeamId={trackedTeamId} />
+          <RoundSection round={lastRound} highlightTeamId={trackedTeamId} showHorarioInvertido={showHorarioInvertido} />
         </section>
       )}
 
@@ -117,7 +121,7 @@ export function HomePage() {
           <h2 className="text-lg font-semibold text-white mb-3">
             Próxima fecha — {nextRound.name}
           </h2>
-          <RoundSection round={nextRound} highlightTeamId={trackedTeamId} />
+          <RoundSection round={nextRound} highlightTeamId={trackedTeamId} showHorarioInvertido={showHorarioInvertido} />
         </section>
       )}
 

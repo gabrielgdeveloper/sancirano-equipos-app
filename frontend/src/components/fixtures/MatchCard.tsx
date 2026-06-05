@@ -7,10 +7,17 @@ interface MatchCardProps {
   match: Match;
   highlightTeamId?: number;
   compact?: boolean;
+  showHorarioInvertido?: boolean;
 }
 
-export function MatchCard({ match, highlightTeamId, compact = false }: MatchCardProps) {
+function isHorarioInvertido(playdate: string): boolean {
+  const d = new Date(playdate);
+  return d.getHours() * 60 + d.getMinutes() <= 630; // <= 10:30
+}
+
+export function MatchCard({ match, highlightTeamId, compact = false, showHorarioInvertido = false }: MatchCardProps) {
   const { localTeam, visitTeam, score, fulfilled, suspended, playdate } = match;
+  const horarioInvertido = showHorarioInvertido && isHorarioInvertido(playdate);
 
   const localHighlight = highlightTeamId === localTeam.id;
   const visitHighlight = highlightTeamId === visitTeam.id;
@@ -26,9 +33,16 @@ export function MatchCard({ match, highlightTeamId, compact = false }: MatchCard
       {/* Fecha y estado */}
       <div className="flex items-center justify-between text-xs text-gray-500">
         <span>{formatMatchDate(playdate)}</span>
-        {suspended && <span className="text-yellow-400 font-medium">Suspendido</span>}
-        {!fulfilled && !suspended && <span className="text-gray-500">Pendiente</span>}
-        {fulfilled && <span className="text-emerald-400 font-medium">Jugado</span>}
+        <div className="flex items-center gap-2">
+          {horarioInvertido && (
+            <span className="font-semibold text-orange-400 bg-orange-400/10 border border-orange-400/20 rounded-full px-2 py-0.5">
+              Horario Invertido
+            </span>
+          )}
+          {suspended && <span className="text-yellow-400 font-medium">Suspendido</span>}
+          {!fulfilled && !suspended && <span className="text-gray-500">Pendiente</span>}
+          {fulfilled && <span className="text-emerald-400 font-medium">Jugado</span>}
+        </div>
       </div>
 
       {/* Equipos y marcador — layout vertical en mobile, horizontal en sm+ */}
