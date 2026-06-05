@@ -9,12 +9,13 @@ interface BottomNavProps {
 export function BottomNav({ currentTournament }: BottomNavProps) {
   const location = useLocation();
   const slug = currentTournament?.slug;
+  const sport = currentTournament?.sport ?? "rugby";
 
   const navLinks = [
     { to: `/torneo/${slug}`, label: "Inicio", icon: HomeIcon },
     { to: `/torneo/${slug}/equipo/san-cirano`, label: "San Cirano", icon: ShieldIcon },
     { to: `/torneo/${slug}/posiciones`, label: "Posiciones", icon: ListIcon },
-    { to: "/ultimos-resultados", label: "Resultados", icon: ResultsIcon },
+    { to: `/ultimos-resultados?sport=${sport}`, label: "Resultados", icon: ResultsIcon },
   ];
 
   return (

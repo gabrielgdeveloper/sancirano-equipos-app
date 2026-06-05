@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { defaultTournament } from "@/config/tournaments";
+import { defaultTournament, defaultHockeyTournament } from "@/config/tournaments";
 
 export function LandingPage() {
   const rugbySlug =
     localStorage.getItem("lastTournamentSlug") ?? defaultTournament.slug;
+  const hockeySlug =
+    localStorage.getItem("lastHockeyTournamentSlug") ?? defaultHockeyTournament.slug;
 
   return (
     <div className="min-h-screen bg-surface-900 flex flex-col items-center justify-center px-4">
@@ -30,7 +32,7 @@ export function LandingPage() {
           </Link>
 
           <Link
-            to="/hockey"
+            to={`/torneo/${hockeySlug}`}
             className="flex-1 sm:flex-none flex flex-col items-center gap-2 px-10 py-6 rounded-2xl bg-surface-600 hover:bg-surface-500 transition-colors text-gray-300 font-bold text-xl border border-surface-400 shadow-lg"
           >
             <span className="text-3xl">🏑</span>

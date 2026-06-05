@@ -1,16 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import { tournamentDataProvider } from "@/services/providers";
+import { getProvider } from "@/services/providers";
 import type { TournamentDataResult } from "@/services/providers";
 import { getTournamentBySlug, type TournamentConfig } from "@/config/tournaments";
 
-const STALE_TIME = 5 * 60 * 1000; // 5 minutos
+const STALE_TIME = 5 * 60 * 1000;
 
 export function useTournamentData(tournament: TournamentConfig | undefined) {
+  const provider = getProvider(tournament?.sport ?? "rugby");
+
   return useQuery<TournamentDataResult, Error>({
     queryKey: ["tournament", tournament?.slug],
     queryFn: () => {
       if (!tournament) throw new Error("Torneo no encontrado");
-      return tournamentDataProvider.getChampionship(tournament.id, tournament.trackedTeamName, tournament.trackedTeamId);
+      return provider.getChampionship(tournament.id, tournament.trackedTeamName, tournament.trackedTeamId);
     },
     enabled: !!tournament,
     staleTime: STALE_TIME,

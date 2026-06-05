@@ -5,6 +5,7 @@ import { config } from "./config";
 import championshipRoutes from "./routes/championship.routes";
 import positionsRoutes from "./routes/positions.routes";
 import syncRoutes from "./routes/sync.routes";
+import hockeyRoutes from "./routes/hockey.routes";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/api/championship", championshipRoutes);
 app.use("/api/positions", positionsRoutes);
 app.use("/api/sync", syncRoutes);
+app.use("/api/hockey", hockeyRoutes);
 
 // Health check
 app.get("/health", (_req, res) => {

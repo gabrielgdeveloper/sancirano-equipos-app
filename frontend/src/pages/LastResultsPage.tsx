@@ -1,7 +1,7 @@
 import { useQueries } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import { tournaments } from "@/config/tournaments";
-import { tournamentDataProvider } from "@/services/providers";
+import { Link, useSearchParams } from "react-router-dom";
+import { rugbyTournaments, hockeyTournaments } from "@/config/tournaments";
+import { getProvider } from "@/services/providers";
 import type { TournamentDataResult } from "@/services/providers";
 import type { TournamentConfig } from "@/config/tournaments";
 import { getLastPlayedMatchForTeam } from "@/utils/matchHelpers";
@@ -76,22 +76,27 @@ function TournamentResult({ tournament, data, isLoading, isError }: TournamentRe
 }
 
 export function LastResultsPage() {
+  const [searchParams] = useSearchParams();
+  const sport = searchParams.get("sport") === "hockey" ? "hockey" : "rugby";
+  const activeTournaments = sport === "hockey" ? hockeyTournaments : rugbyTournaments;
+
   const results = useQueries({
-    queries: tournaments.map((t) => ({
+    queries: activeTournaments.map((t) => ({
       queryKey: ["tournament", t.slug],
       queryFn: () =>
-        tournamentDataProvider.getChampionship(t.id, t.trackedTeamName, t.trackedTeamId),
+        getProvider(t.sport).getChampionship(t.id, t.trackedTeamName, t.trackedTeamId),
       staleTime: STALE_TIME,
       retry: 2,
     })),
   });
 
   const loadingCount = results.filter((r) => r.isLoading).length;
+  const sportLabel = sport === "hockey" ? "Hockey" : "Rugby";
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Últimos Resultados</h1>
+        <h1 className="text-2xl font-bold text-white">Últimos Resultados — {sportLabel}</h1>
         <p className="text-gray-400 mt-1">
           Último partido jugado por San Cirano en cada división
           {loadingCount > 0 && (
@@ -103,7 +108,7 @@ export function LastResultsPage() {
       </div>
 
       <div className="flex flex-col gap-6">
-        {tournaments.map((tournament, i) => (
+        {activeTournaments.map((tournament, i) => (
           <TournamentResult
             key={tournament.slug}
             tournament={tournament}

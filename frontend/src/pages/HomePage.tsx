@@ -10,7 +10,7 @@ import { TeamSummaryCard } from "@/components/team/TeamSummaryCard";
 import { RoundSection } from "@/components/fixtures/RoundSection";
 import { StandingsTable } from "@/components/standings/StandingsTable";
 import { getLastPlayedRound, getNextRound } from "@/utils/matchHelpers";
-import { triggerSync } from "@/services/api/urbaApi";
+import { triggerSync, triggerHockeySync } from "@/services/api/urbaApi";
 import { defaultTournament } from "@/config/tournaments";
 import { appConfig } from "@/config/appConfig";
 
@@ -36,10 +36,15 @@ export function HomePage() {
     tournament?.trackedTeamId
   );
 
-  // Persistir último torneo seleccionado
+  // Persistir último torneo seleccionado (por deporte)
   useEffect(() => {
-    if (slug) localStorage.setItem("lastTournamentSlug", slug);
-  }, [slug]);
+    if (!slug || !tournament) return;
+    if (tournament.sport === "hockey") {
+      localStorage.setItem("lastHockeyTournamentSlug", slug);
+    } else {
+      localStorage.setItem("lastTournamentSlug", slug);
+    }
+  }, [slug, tournament]);
 
   if (!slug || isLoading) return <LoadingSpinner label="Cargando torneo..." />;
   if (isError) return <ErrorState message={error?.message} onRetry={refetch} />;
@@ -52,8 +57,12 @@ export function HomePage() {
 
   async function handleSync() {
     if (!tournament) return;
-    await triggerSync(tournament.id);
-    queryClient.invalidateQueries({ queryKey: ["tournament", tournament.id] });
+    if (tournament.sport === "hockey") {
+      await triggerHockeySync(tournament.id);
+    } else {
+      await triggerSync(tournament.id);
+    }
+    queryClient.invalidateQueries({ queryKey: ["tournament", tournament.slug] });
   }
 
   return (
@@ -62,8 +71,11 @@ export function HomePage() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
-            Planteles San Cirano{" "}
-            <span className="text-brand-400">URBA 2026</span>
+            {tournament?.sport === "hockey" ? (
+              <>San Cirano <span className="text-brand-400">Hockey</span></>
+            ) : (
+              <>Planteles San Cirano <span className="text-brand-400">URBA 2026</span></>
+            )}
           </h1>
           <p className="text-gray-400 mt-1">
             {championship.name} — {championship.season.name}

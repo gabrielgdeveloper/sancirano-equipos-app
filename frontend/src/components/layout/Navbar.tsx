@@ -10,6 +10,8 @@ interface NavbarProps {
 export function Navbar({ currentTournament }: NavbarProps) {
   const location = useLocation();
   const slug = currentTournament?.slug;
+  const sport = currentTournament?.sport ?? "rugby";
+  const resultsTo = `/ultimos-resultados?sport=${sport}`;
 
   const slugLinks = slug
     ? [
@@ -18,7 +20,7 @@ export function Navbar({ currentTournament }: NavbarProps) {
         { to: `/torneo/${slug}/posiciones`, label: "Posiciones" },
       ]
     : [];
-  const navLinks = [...slugLinks, { to: "/ultimos-resultados", label: "Resultados" }];
+  const navLinks = [...slugLinks, { to: resultsTo, label: "Resultados" }];
 
   return (
     <header className="sticky top-0 z-50 bg-surface-800/90 backdrop-blur-sm border-b border-surface-600">
@@ -41,7 +43,7 @@ export function Navbar({ currentTournament }: NavbarProps) {
                   to={to}
                   className={clsx(
                     "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                    location.pathname === to
+                    location.pathname === to.split("?")[0] && location.search === (to.includes("?") ? `?${to.split("?")[1]}` : "")
                       ? "bg-brand-500/20 text-brand-300"
                       : "text-gray-400 hover:text-gray-200 hover:bg-surface-600"
                   )}

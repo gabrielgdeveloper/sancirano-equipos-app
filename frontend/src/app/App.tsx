@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Layout } from "@/components/layout/Layout";
 import { LandingPage } from "@/pages/LandingPage";
-import { HockeyPage } from "@/pages/HockeyPage";
 import { HomePage } from "@/pages/HomePage";
 import { TeamPage } from "@/pages/TeamPage";
 import { StandingsPage } from "@/pages/StandingsPage";
@@ -25,8 +24,6 @@ export function App() {
         <Routes>
           {/* Landing page */}
           <Route path="/" element={<LandingPage />} />
-          {/* Hockey próximamente */}
-          <Route path="/hockey" element={<HockeyPage />} />
           <Route element={<Layout />}>
             {/* Home del torneo */}
             <Route path="/torneo/:slug" element={<HomePage />} />

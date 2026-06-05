@@ -25,3 +25,22 @@ export async function triggerSync(tournamentId?: number): Promise<{ message: str
   const { data } = await client.post(url);
   return data;
 }
+
+/** Hockey — campeonato */
+export async function fetchHockeyChampionship(id: number): Promise<ApiChampionshipResponse> {
+  const { data } = await client.get<ApiChampionshipResponse>(`/hockey/championship/${id}`);
+  return data;
+}
+
+/** Hockey — tabla de posiciones */
+export async function fetchHockeyPositions(id: number): Promise<ApiPositionsResponse> {
+  const { data } = await client.get<ApiPositionsResponse>(`/hockey/positions/${id}`);
+  return data;
+}
+
+/** Hockey — sincronización */
+export async function triggerHockeySync(tournamentId?: number): Promise<{ message: string; lastSync: string }> {
+  const url = tournamentId ? `/hockey/sync/${tournamentId}` : "/hockey/sync";
+  const { data } = await client.post(url);
+  return data;
+}
