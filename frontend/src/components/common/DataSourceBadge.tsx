@@ -6,9 +6,11 @@ interface DataSourceBadgeProps {
   lastSync: string | null;
   onSync?: () => void;
   isSyncing?: boolean;
+  sport?: "rugby" | "hockey";
 }
 
-export function DataSourceBadge({ source, lastSync, onSync, isSyncing }: DataSourceBadgeProps) {
+export function DataSourceBadge({ source, lastSync, onSync, isSyncing, sport }: DataSourceBadgeProps) {
+  const apiLabel = sport === "hockey" ? "API AHBA" : "API URBA";
   return (
     <div className="flex flex-wrap items-center gap-2 text-xs">
       <span
@@ -19,7 +21,7 @@ export function DataSourceBadge({ source, lastSync, onSync, isSyncing }: DataSou
             : "bg-blue-500/10 text-blue-400 border border-blue-500/20"
         )}
       >
-        {source === "api" ? "Datos en vivo — API URBA" : "Datos cacheados — DB local"}
+        {source === "api" ? `Datos en vivo — ${apiLabel}` : "Datos cacheados — DB local"}
       </span>
 
       {lastSync && (

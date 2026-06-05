@@ -85,6 +85,7 @@ export function HomePage() {
           source={source}
           lastSync={lastSync}
           onSync={handleSync}
+          sport={tournament?.sport}
         />
       </div>
 
