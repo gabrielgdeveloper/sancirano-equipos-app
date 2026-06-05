@@ -30,7 +30,7 @@ export function Layout() {
         <Outlet />
       </main>
       <footer className="border-t border-surface-700 mt-16 py-6 pb-24 sm:pb-6 text-center text-xs text-gray-600">
-        Planteles San Cirano URBA 2026 — Datos: api.urba.org.ar
+        San Cirano Sports Hub 2026 — Datos: api.urba.org.ar y api.tournamenttracker.buenosaireshockey.ar
       </footer>
       <BottomNav currentTournament={fallbackTournament} />
     </div>

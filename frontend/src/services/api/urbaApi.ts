@@ -7,6 +7,13 @@ const client = axios.create({
   timeout: 15000,
 });
 
+// Hockey siempre usa /api relativo (Vercel function en prod, proxy en dev)
+// Nunca va directo a URBA porque la API de hockey no está en api.urba.org.ar
+const hockeyClient = axios.create({
+  baseURL: "/api",
+  timeout: 15000,
+});
+
 /** Obtiene campeonato con rounds, partidos y equipos */
 export async function fetchChampionship(id: number): Promise<ApiChampionshipResponse> {
   const { data } = await client.get<ApiChampionshipResponse>(`/championship/${id}`);
@@ -28,19 +35,19 @@ export async function triggerSync(tournamentId?: number): Promise<{ message: str
 
 /** Hockey — campeonato */
 export async function fetchHockeyChampionship(id: number): Promise<ApiChampionshipResponse> {
-  const { data } = await client.get<ApiChampionshipResponse>(`/hockey/championship/${id}`);
+  const { data } = await hockeyClient.get<ApiChampionshipResponse>(`/hockey/championship/${id}`);
   return data;
 }
 
 /** Hockey — tabla de posiciones */
 export async function fetchHockeyPositions(id: number): Promise<ApiPositionsResponse> {
-  const { data } = await client.get<ApiPositionsResponse>(`/hockey/positions/${id}`);
+  const { data } = await hockeyClient.get<ApiPositionsResponse>(`/hockey/positions/${id}`);
   return data;
 }
 
 /** Hockey — sincronización */
 export async function triggerHockeySync(tournamentId?: number): Promise<{ message: string; lastSync: string }> {
   const url = tournamentId ? `/hockey/sync/${tournamentId}` : "/hockey/sync";
-  const { data } = await client.post(url);
+  const { data } = await hockeyClient.post(url);
   return data;
 }
