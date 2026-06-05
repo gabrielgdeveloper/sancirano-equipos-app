@@ -28,8 +28,7 @@ export function Navbar({ currentTournament }: NavbarProps) {
           <Link to="/" className="flex items-center gap-2 flex-shrink-0">
             <span className="text-lg font-bold text-white leading-tight">
               San Cirano
-              <span className="text-brand-400 ml-1">URBA</span>
-              <span className="text-gray-400 text-sm font-normal ml-1">2026</span>
+              <span className="text-brand-400 ml-1">Sports Hub</span>
             </span>
           </Link>
 

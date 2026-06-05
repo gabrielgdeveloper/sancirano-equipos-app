@@ -2,11 +2,12 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Layout } from "@/components/layout/Layout";
+import { LandingPage } from "@/pages/LandingPage";
+import { HockeyPage } from "@/pages/HockeyPage";
 import { HomePage } from "@/pages/HomePage";
 import { TeamPage } from "@/pages/TeamPage";
 import { StandingsPage } from "@/pages/StandingsPage";
 import { LastResultsPage } from "@/pages/LastResultsPage";
-import { defaultTournament } from "@/config/tournaments";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,18 +23,10 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          {/* Redirigir raíz al torneo por defecto */}
-          <Route
-            path="/"
-            element={
-              <Navigate
-                to={`/torneo/${
-                  localStorage.getItem("lastTournamentSlug") ?? defaultTournament.slug
-                }`}
-                replace
-              />
-            }
-          />
+          {/* Landing page */}
+          <Route path="/" element={<LandingPage />} />
+          {/* Hockey próximamente */}
+          <Route path="/hockey" element={<HockeyPage />} />
           <Route element={<Layout />}>
             {/* Home del torneo */}
             <Route path="/torneo/:slug" element={<HomePage />} />
