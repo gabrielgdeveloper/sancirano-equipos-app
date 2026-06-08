@@ -100,7 +100,7 @@ export function HomePage() {
           <TeamSummaryCard stats={teamStats} tournamentSlug={slug} trackedTeamName={tournament?.trackedTeamName} showHorarioInvertido={showHorarioInvertido} />
         </section>
       ) : (
-        <div className="bg-surface-700 rounded-xl p-6 text-center text-gray-500">
+        <div className="bg-brand-700 rounded-xl p-6 text-center text-gray-500">
           San Cirano no encontrado en este torneo.
         </div>
       )}

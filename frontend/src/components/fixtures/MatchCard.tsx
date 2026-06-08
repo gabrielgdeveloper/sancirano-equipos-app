@@ -25,8 +25,8 @@ export function MatchCard({ match, highlightTeamId, compact = false, showHorario
   return (
     <div
       className={clsx(
-        "bg-surface-700 rounded-xl p-3 flex flex-col gap-2 border",
-        fulfilled ? "border-surface-500" : "border-surface-600",
+        "bg-brand-700 rounded-xl p-3 flex flex-col gap-2 border",
+        fulfilled ? "border-brand-500" : "border-brand-600",
         suspended && "opacity-60"
       )}
     >
@@ -35,7 +35,7 @@ export function MatchCard({ match, highlightTeamId, compact = false, showHorario
         <span>{formatMatchDate(playdate)}</span>
         <div className="flex items-center gap-2">
           {horarioInvertido && (
-            <span className="font-semibold text-orange-400 bg-orange-400/10 border border-orange-400/20 rounded-full px-2 py-0.5">
+            <span className="font-semibold text-accent-orange bg-accent-orange/10 border border-accent-orange/20 rounded-full px-2 py-0.5">
               Horario Invertido
             </span>
           )}

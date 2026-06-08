@@ -23,7 +23,7 @@ export function TournamentSelector({ current }: TournamentSelectorProps) {
         id="tournament-select"
         value={current?.slug ?? ""}
         onChange={handleChange}
-        className="bg-surface-600 border border-surface-400 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
+        className="bg-brand-600 border border-brand-400 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"
       >
         {list.map((t) => (
           <option key={t.slug} value={t.slug}>{t.name}</option>

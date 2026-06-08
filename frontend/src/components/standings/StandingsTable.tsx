@@ -12,10 +12,10 @@ interface StandingsTableProps {
 
 export function StandingsTable({ standings, compact = false, showPromotion = false, showPlayoff = false, showGanador = false }: StandingsTableProps) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-surface-600">
+    <div className="overflow-x-auto rounded-xl border border-brand-600">
       <table className="w-full text-sm">
         <thead>
-          <tr className="bg-surface-700 text-gray-400 text-xs uppercase tracking-wider">
+          <tr className="bg-brand-700 text-gray-400 text-xs uppercase tracking-wider">
             <th className="px-3 py-3 text-left w-8">#</th>
             <th className="px-3 py-3 text-left">Equipo</th>
             <th className="px-3 py-3 text-center font-bold text-white">Pts</th>
@@ -34,7 +34,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
             )}
           </tr>
         </thead>
-        <tbody className="divide-y divide-surface-600">
+        <tbody className="divide-y divide-brand-600">
           {standings.map((row) => (
             <tr
               key={row.id}
@@ -43,12 +43,12 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                 row.isTracked
                   ? "bg-brand-500/10 border-l-brand-500"
                   : showPromotion && row.position === 1
-                  ? "border-l-emerald-500 hover:bg-surface-700"
+                  ? "border-l-emerald-500 hover:bg-brand-700"
                   : showGanador && row.position >= 1 && row.position <= 6
-                  ? "border-l-yellow-500 hover:bg-surface-700"
+                  ? "border-l-yellow-500 hover:bg-brand-700"
                   : (showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)
-                  ? "border-l-yellow-500 hover:bg-surface-700"
-                  : "border-l-transparent hover:bg-surface-700"
+                  ? "border-l-yellow-500 hover:bg-brand-700"
+                  : "border-l-transparent hover:bg-brand-700"
               )}
             >
               <td className="px-3 py-3 text-gray-400 text-center font-medium">

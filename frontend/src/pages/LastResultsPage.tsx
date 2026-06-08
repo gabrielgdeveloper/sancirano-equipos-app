@@ -18,7 +18,7 @@ interface TournamentResultProps {
 
 function TournamentResult({ tournament, data, isLoading, isError }: TournamentResultProps) {
   return (
-    <section className="border-b border-surface-700 pb-6 last:border-0">
+    <section className="border-b border-brand-700 pb-6 last:border-0">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-base font-semibold text-white">{tournament.name}</h2>
         <Link
@@ -30,13 +30,13 @@ function TournamentResult({ tournament, data, isLoading, isError }: TournamentRe
       </div>
 
       {isLoading && (
-        <div className="bg-surface-700 rounded-xl p-4 text-center text-gray-500 text-sm">
+        <div className="bg-brand-700 rounded-xl p-4 text-center text-gray-500 text-sm">
           Cargando...
         </div>
       )}
 
       {isError && !isLoading && (
-        <div className="bg-surface-700 rounded-xl p-4 text-center text-gray-500 text-sm">
+        <div className="bg-brand-700 rounded-xl p-4 text-center text-gray-500 text-sm">
           Error al cargar datos
         </div>
       )}
@@ -45,7 +45,7 @@ function TournamentResult({ tournament, data, isLoading, isError }: TournamentRe
         const trackedTeam = data.standings.find((s) => s.isTracked)?.team;
         if (!trackedTeam) {
           return (
-            <div className="bg-surface-700 rounded-xl p-4 text-center text-gray-500 text-sm">
+            <div className="bg-brand-700 rounded-xl p-4 text-center text-gray-500 text-sm">
               San Cirano no encontrado
             </div>
           );
@@ -54,7 +54,7 @@ function TournamentResult({ tournament, data, isLoading, isError }: TournamentRe
         const lastMatch = getLastPlayedMatchForTeam(data.championship, trackedTeam.id);
         if (!lastMatch) {
           return (
-            <div className="bg-surface-700 rounded-xl p-4 text-center text-gray-500 text-sm">
+            <div className="bg-brand-700 rounded-xl p-4 text-center text-gray-500 text-sm">
               Sin partidos jugados
             </div>
           );

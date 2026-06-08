@@ -23,7 +23,7 @@ export function Navbar({ currentTournament }: NavbarProps) {
   const navLinks = [...slugLinks, { to: resultsTo, label: "Resultados" }];
 
   return (
-    <header className="sticky top-0 z-50 bg-surface-800/90 backdrop-blur-sm border-b border-surface-600">
+    <header className="sticky top-0 z-50 bg-brand-800/90 backdrop-blur-sm border-b border-brand-600">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo / Brand */}
@@ -45,7 +45,7 @@ export function Navbar({ currentTournament }: NavbarProps) {
                     "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                     location.pathname === to.split("?")[0] && location.search === (to.includes("?") ? `?${to.split("?")[1]}` : "")
                       ? "bg-brand-500/20 text-brand-300"
-                      : "text-gray-400 hover:text-gray-200 hover:bg-surface-600"
+                      : "text-gray-400 hover:text-gray-200 hover:bg-brand-600"
                   )}
                 >
                   {label}

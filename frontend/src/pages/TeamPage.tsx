@@ -58,7 +58,7 @@ export function TeamPage() {
   return (
     <div className="flex flex-col gap-8">
       {/* Header del equipo */}
-      <div className="bg-gradient-to-br from-brand-900/40 to-surface-700 rounded-2xl border border-brand-500/20 p-6">
+      <div className="bg-gradient-to-br from-brand-900/40 to-brand-700 rounded-2xl border border-brand-500/20 p-6">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
           <TeamBadge imageUrl={team.club.imageUrl} name={team.club.name} size="xl" />
           <div className="flex-1 text-center sm:text-left">
@@ -91,7 +91,7 @@ export function TeamPage() {
               <div
                 key={label}
                 className={clsx(
-                  "bg-surface-800/60 rounded-xl p-3 text-center",
+                  "bg-brand-800/60 rounded-xl p-3 text-center",
                   idx === arr.length - 1 && arr.length % 2 !== 0 && "col-span-2 sm:col-span-1"
                 )}
               >
@@ -139,7 +139,7 @@ export function TeamPage() {
               "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors",
               roleFilter === f
                 ? "bg-brand-600 text-white"
-                : "bg-surface-600 text-gray-400 hover:text-gray-200"
+                : "bg-brand-600 text-gray-400 hover:text-gray-200"
             )}
           >
             {{ all: "Todos", local: "Local", visit: "Visitante" }[f]}
@@ -167,7 +167,7 @@ export function TeamPage() {
                 const result = getMatchResult(match, team.id);
                 const borderColor = { won: "border-l-emerald-500", lost: "border-l-red-500", tied: "border-l-yellow-500" };
                 return (
-                  <div key={match.id} className={clsx("border-l-2", result ? borderColor[result] : "border-l-surface-500")}>
+                  <div key={match.id} className={clsx("border-l-2", result ? borderColor[result] : "border-l-brand-500")}>
                     <MatchCard match={match} highlightTeamId={team.id} />
                   </div>
                 );

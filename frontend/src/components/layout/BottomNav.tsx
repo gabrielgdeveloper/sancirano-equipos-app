@@ -19,7 +19,7 @@ export function BottomNav({ currentTournament }: BottomNavProps) {
   ];
 
   return (
-    <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-800 border-t border-surface-600">
+    <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-brand-800 border-t border-brand-600">
       <div className="flex">
         {navLinks.map(({ to, label, icon: Icon }) => {
           const active = location.pathname === to;

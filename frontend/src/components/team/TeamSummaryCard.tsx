@@ -17,7 +17,7 @@ export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName, showHo
   const displayName = trackedTeamName ?? team.club.name;
 
   return (
-    <div className="bg-gradient-to-br from-brand-900/30 to-surface-700 rounded-2xl border border-brand-500/20 p-5 flex flex-col gap-5">
+    <div className="bg-gradient-to-br from-brand-900/30 to-brand-700 rounded-2xl border border-brand-500/20 p-5 flex flex-col gap-5">
       {/* Header */}
       <div className="flex items-center gap-4">
         <TeamBadge imageUrl={team.club.imageUrl} name={displayName} size="lg" />
@@ -40,7 +40,7 @@ export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName, showHo
             { label: "Empatados", value: standing.tied, color: "text-yellow-400" },
             { label: "Perdidos", value: standing.lost, color: "text-red-400" },
           ].map(({ label, value, color }) => (
-            <div key={label} className="bg-surface-800/60 rounded-lg p-2">
+            <div key={label} className="bg-brand-800/60 rounded-lg p-2">
               <p className={clsx("text-xl font-bold", color)}>{value}</p>
               <p className="text-xs text-gray-500 mt-0.5">{label}</p>
             </div>

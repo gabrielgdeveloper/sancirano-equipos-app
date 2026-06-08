@@ -8,7 +8,7 @@ export function LandingPage() {
     localStorage.getItem("lastHockeyTournamentSlug") ?? defaultHockeyTournament.slug;
 
   return (
-    <div className="min-h-screen bg-surface-900 flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen bg-brand-900 flex flex-col items-center justify-center px-4">
       <div className="max-w-2xl w-full text-center flex flex-col items-center gap-8">
         {/* Title */}
         <div>
@@ -25,7 +25,7 @@ export function LandingPage() {
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
             to={`/torneo/${rugbySlug}`}
-            className="flex-1 sm:flex-none flex flex-col items-center gap-2 px-10 py-6 rounded-2xl bg-brand-600 hover:bg-brand-500 transition-colors text-white font-bold text-xl shadow-lg shadow-brand-900/40"
+            className="flex-1 sm:w-48 flex flex-col items-center gap-2 px-10 py-6 rounded-2xl bg-brand-800/60 hover:bg-brand-700/60 transition-colors text-brand-100 font-bold text-xl border border-brand-600/40 shadow-lg"
           >
             <span className="text-3xl">🏉</span>
             Rugby
@@ -33,7 +33,7 @@ export function LandingPage() {
 
           <Link
             to={`/torneo/${hockeySlug}`}
-            className="flex-1 sm:flex-none flex flex-col items-center gap-2 px-10 py-6 rounded-2xl bg-surface-600 hover:bg-surface-500 transition-colors text-gray-300 font-bold text-xl border border-surface-400 shadow-lg"
+            className="flex-1 sm:w-48 flex flex-col items-center gap-2 px-10 py-6 rounded-2xl bg-brand-800/60 hover:bg-brand-700/60 transition-colors text-brand-100 font-bold text-xl border border-brand-600/40 shadow-lg"
           >
             <span className="text-3xl">🏑</span>
             Hockey

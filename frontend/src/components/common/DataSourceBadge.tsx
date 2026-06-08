@@ -34,7 +34,7 @@ export function DataSourceBadge({ source, lastSync, onSync, isSyncing, sport }: 
         <button
           onClick={onSync}
           disabled={isSyncing}
-          className="px-3 py-1 bg-surface-600 hover:bg-surface-500 text-gray-300 rounded-lg transition-colors disabled:opacity-50"
+          className="px-3 py-1 bg-brand-600 hover:bg-brand-500 text-gray-300 rounded-lg transition-colors disabled:opacity-50"
         >
           {isSyncing ? "Sincronizando..." : "Re-sync"}
         </button>
