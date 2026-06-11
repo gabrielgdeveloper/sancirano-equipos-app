@@ -11,7 +11,7 @@ import { RoundSection } from "@/components/fixtures/RoundSection";
 import { StandingsTable } from "@/components/standings/StandingsTable";
 import { getLastPlayedRound, getNextRound } from "@/utils/matchHelpers";
 import { triggerSync, triggerHockeySync } from "@/services/api/urbaApi";
-import { defaultTournament } from "@/config/tournaments";
+import { defaultTournament, getTournamentBySlug } from "@/config/tournaments";
 import { appConfig } from "@/config/appConfig";
 
 export function HomePage() {
@@ -137,7 +137,7 @@ export function HomePage() {
               Ver completa →
             </a>
           </div>
-          <StandingsTable standings={standings} compact showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a"} />
+          <StandingsTable standings={standings} compact zones={getTournamentBySlug(slug ?? "")?.zones} showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a"} />
         </section>
       )}
     </div>

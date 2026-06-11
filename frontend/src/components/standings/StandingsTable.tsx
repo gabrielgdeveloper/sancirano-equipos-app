@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import type { StandingRow } from "@/types/domain";
+import type { ZoneConfig } from "@/config/tournaments";
 import { TeamBadge } from "@/components/common/TeamBadge";
 
 interface StandingsTableProps {
@@ -8,9 +9,28 @@ interface StandingsTableProps {
   showPromotion?: boolean;
   showPlayoff?: boolean;
   showGanador?: boolean;
+  zones?: ZoneConfig[];
 }
 
-export function StandingsTable({ standings, compact = false, showPromotion = false, showPlayoff = false, showGanador = false }: StandingsTableProps) {
+const zoneBorderClass: Record<ZoneConfig["color"], string> = {
+  green:  "border-l-emerald-500",
+  yellow: "border-l-yellow-500",
+  orange: "border-l-orange-500",
+  red:    "border-l-red-500",
+};
+
+const zoneLabelClass: Record<ZoneConfig["color"], string> = {
+  green:  "text-emerald-400",
+  yellow: "text-yellow-400",
+  orange: "text-orange-400",
+  red:    "text-red-400",
+};
+
+function getZone(zones: ZoneConfig[] | undefined, position: number): ZoneConfig | undefined {
+  return zones?.find((z) => z.positions.includes(position));
+}
+
+export function StandingsTable({ standings, compact = false, showPromotion = false, showPlayoff = false, showGanador = false, zones }: StandingsTableProps) {
   return (
     <div className="overflow-x-auto rounded-xl border border-brand-600">
       <table className="w-full text-sm">
@@ -35,13 +55,17 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
           </tr>
         </thead>
         <tbody className="divide-y divide-brand-600">
-          {standings.map((row) => (
+          {standings.map((row) => {
+            const zone = getZone(zones, row.position);
+            return (
             <tr
               key={row.id}
               className={clsx(
                 "transition-colors border-l-2",
                 row.isTracked
                   ? "bg-brand-500/10 border-l-brand-500"
+                  : zone
+                  ? `${zoneBorderClass[zone.color]} hover:bg-brand-700`
                   : showPromotion && row.position === 1
                   ? "border-l-emerald-500 hover:bg-brand-700"
                   : showGanador && row.position >= 1 && row.position <= 6
@@ -54,13 +78,18 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
               <td className="px-3 py-3 text-gray-400 text-center font-medium">
                 <div className="flex flex-col items-center gap-0.5">
                   <span>{row.position}</span>
-                  {showPromotion && row.position === 1 && (
+                  {zone && (
+                    <span className={clsx("text-[9px] font-semibold uppercase leading-none", zoneLabelClass[zone.color])}>
+                      {zone.label}
+                    </span>
+                  )}
+                  {!zone && showPromotion && row.position === 1 && (
                     <span className="text-[9px] font-semibold text-emerald-400 uppercase leading-none">Ascenso</span>
                   )}
-                  {showGanador && row.position >= 1 && row.position <= 6 && (
+                  {!zone && showGanador && row.position >= 1 && row.position <= 6 && (
                     <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Ganadores</span>
                   )}
-                  {((showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (
+                  {!zone && ((showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (
                     <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Playoff</span>
                   )}
                 </div>
@@ -116,7 +145,8 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                 </>
               )}
             </tr>
-          ))}
+            );
+          })}
         </tbody>
       </table>
     </div>

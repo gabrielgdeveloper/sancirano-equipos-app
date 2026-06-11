@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useTournamentDataBySlug } from "@/hooks/useTournamentData";
+import { getTournamentBySlug } from "@/config/tournaments";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { ErrorState } from "@/components/common/ErrorState";
 import { StandingsTable } from "@/components/standings/StandingsTable";
@@ -14,6 +15,7 @@ export function StandingsPage() {
   if (!data) return null;
 
   const { championship, standings, source, lastSync } = data;
+  const tournamentConfig = getTournamentBySlug(slug ?? "");
 
   return (
     <div className="flex flex-col gap-6">
@@ -28,7 +30,7 @@ export function StandingsPage() {
       </div>
 
       {standings.length > 0 ? (
-        <StandingsTable standings={standings} compact={false} showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a"} />
+        <StandingsTable standings={standings} compact={false} zones={tournamentConfig?.zones} showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a"} />
       ) : (
         <p className="text-gray-500 text-center py-12">No hay posiciones disponibles.</p>
       )}

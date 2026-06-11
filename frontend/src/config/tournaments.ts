@@ -1,3 +1,9 @@
+export interface ZoneConfig {
+  positions: number[];
+  label: string;
+  color: "green" | "yellow" | "orange" | "red";
+}
+
 export interface TournamentConfig {
   id: number;
   slug: string;
@@ -5,7 +11,22 @@ export interface TournamentConfig {
   trackedTeamName: string;
   trackedTeamId?: number;
   sport: "rugby" | "hockey";
+  zones?: ZoneConfig[];
 }
+
+const damasBZones: ZoneConfig[] = [
+  { positions: [1, 2],       label: "Ascenso",  color: "green"  },
+  { positions: [3],          label: "Playoff",  color: "yellow" },
+  { positions: [11, 12],     label: "Repechaje", color: "orange" },
+  { positions: [13, 14],     label: "Descenso", color: "red"    },
+];
+
+const damasD3Zones: ZoneConfig[] = [
+  { positions: [1],      label: "Ascenso",   color: "green"  },
+  { positions: [2],      label: "Playoff",   color: "yellow" },
+  { positions: [12],     label: "Repechaje", color: "orange" },
+  { positions: [13, 14], label: "Descenso",  color: "red"    },
+];
 
 export const rugbyTournaments: TournamentConfig[] = [
   { id: 2025177, slug: "primera",           name: "Primera",           trackedTeamName: "San Cirano",       sport: "rugby" },
@@ -27,8 +48,8 @@ export const rugbyTournaments: TournamentConfig[] = [
 ];
 
 export const hockeyTournaments: TournamentConfig[] = [
-  { id: 338,  slug: "hockey-primera-a",    name: "Primera Tira A",    trackedTeamName: "SAN CIRANO", sport: "hockey" },
-  { id: 383,  slug: "hockey-primera-b",    name: "Primera Tira B",    trackedTeamName: "SAN CIRANO", sport: "hockey" },
+  { id: 338,  slug: "hockey-primera-a",    name: "Primera Tira A",    trackedTeamName: "SAN CIRANO", sport: "hockey", zones: damasBZones },
+  { id: 383,  slug: "hockey-primera-b",    name: "Primera Tira B",    trackedTeamName: "SAN CIRANO", sport: "hockey", zones: damasD3Zones },
   { id: 486,  slug: "hockey-segunda",      name: "Segunda",           trackedTeamName: "SAN CIRANO", sport: "hockey" },
   { id: 339,  slug: "hockey-intermedia-a", name: "Intermedia Tira A", trackedTeamName: "SAN CIRANO", sport: "hockey" },
   { id: 384,  slug: "hockey-intermedia-b", name: "Intermedia Tira B", trackedTeamName: "SAN CIRANO", sport: "hockey" },
