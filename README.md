@@ -1,6 +1,6 @@
-# Planteles San Cirano URBA 2026
+# Planteles Champagnat URBA y AHBA 2026
 
-Dashboard deportivo para seguir los planteles y resultados de San Cirano en los torneos URBA 2026.
+Dashboard deportivo para seguir los planteles y resultados de Champagnat en los torneos URBA y AHBA 2026.
 
 ---
 
@@ -118,7 +118,7 @@ Para agregar un torneo: simplemente agregar una entrada en el array `tournaments
 |---|---|
 | `/` | Home con selector de torneo |
 | `/torneo/:slug` | Detalle del torneo seleccionado |
-| `/torneo/:slug/equipo/san-cirano` | Vista dedicada de San Cirano |
+| `/torneo/:slug/equipo/champagnat` | Vista dedicada de Champagnat |
 | `/torneo/:slug/posiciones` | Tabla de posiciones completa |
 
 ---
