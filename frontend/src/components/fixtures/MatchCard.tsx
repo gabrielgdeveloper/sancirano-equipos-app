@@ -22,11 +22,20 @@ export function MatchCard({ match, highlightTeamId, compact = false, showHorario
   const localHighlight = highlightTeamId === localTeam.id;
   const visitHighlight = highlightTeamId === visitTeam.id;
 
+  let resultBorder = fulfilled ? "border-brand-500" : "border-brand-600";
+  if (fulfilled && score != null && (localHighlight || visitHighlight)) {
+    const tracked = localHighlight ? score.localScore : score.visitScore;
+    const opponent = localHighlight ? score.visitScore : score.localScore;
+    if (tracked > opponent) resultBorder = "border-emerald-500";
+    else if (tracked < opponent) resultBorder = "border-red-500";
+    else resultBorder = "border-yellow-400";
+  }
+
   return (
     <div
       className={clsx(
         "bg-brand-700 rounded-xl p-3 flex flex-col gap-2 border",
-        fulfilled ? "border-brand-500" : "border-brand-600",
+        resultBorder,
         suspended && "opacity-60"
       )}
     >
