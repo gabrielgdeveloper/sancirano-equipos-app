@@ -12,7 +12,6 @@ import { StandingsTable } from "@/components/standings/StandingsTable";
 import { getLastPlayedRound, getNextRound } from "@/utils/matchHelpers";
 import { triggerSync, triggerHockeySync } from "@/services/api/urbaApi";
 import { defaultTournament, getTournamentBySlug } from "@/config/tournaments";
-import { appConfig } from "@/config/appConfig";
 
 export function HomePage() {
   const { slug } = useParams<{ slug?: string }>();
@@ -29,12 +28,7 @@ export function HomePage() {
   const { data, isLoading, isError, error, refetch, tournament } = useTournamentDataBySlug(slug);
   const queryClient = useQueryClient();
 
-  const teamStats = useTeamStats(
-    data?.championship,
-    data?.standings,
-    tournament?.trackedTeamName ?? appConfig.trackedTeamName,
-    tournament?.trackedTeamId
-  );
+  const teamStats = useTeamStats(data?.championship, data?.standings, tournament?.trackedTeamName ?? "", tournament?.trackedTeamId);
 
   // Persistir último torneo seleccionado (por deporte)
   useEffect(() => {
@@ -76,9 +70,9 @@ export function HomePage() {
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             {tournament?.sport === "hockey" ? (
-              <>San Cirano <span className="text-brand-400">Hockey</span></>
+              <>Champagnat <span className="text-brand-400">Hockey</span></>
             ) : (
-              <>Planteles San Cirano <span className="text-brand-400">URBA 2026</span></>
+              <>Planteles Champagnat <span className="text-brand-400">URBA 2026</span></>
             )}
           </h1>
           <p className="text-gray-400 mt-1">
@@ -93,15 +87,19 @@ export function HomePage() {
         />
       </div>
 
-      {/* San Cirano card */}
+      {/* Champagnat card */}
       {teamStats ? (
         <section>
-          <h2 className="text-lg font-semibold text-white mb-3">San Cirano</h2>
-          <TeamSummaryCard stats={teamStats} tournamentSlug={slug} trackedTeamName={tournament?.trackedTeamName} showHorarioInvertido={showHorarioInvertido} />
+          <TeamSummaryCard
+            stats={teamStats}
+            tournamentSlug={slug!}
+            trackedTeamName={tournament?.trackedTeamName}
+            showHorarioInvertido={showHorarioInvertido}
+          />
         </section>
       ) : (
         <div className="bg-brand-700 rounded-xl p-6 text-center text-gray-500">
-          San Cirano no encontrado en este torneo.
+          Champagnat no encontrado en este torneo.
         </div>
       )}
 

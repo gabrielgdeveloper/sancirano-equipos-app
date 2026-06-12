@@ -13,7 +13,7 @@ export function BottomNav({ currentTournament }: BottomNavProps) {
 
   const navLinks = [
     { to: `/torneo/${slug}`, label: "Inicio", icon: HomeIcon },
-    { to: `/torneo/${slug}/equipo/san-cirano`, label: "San Cirano", icon: ShieldIcon },
+    { to: `/torneo/${slug}/equipo/san-cirano`, label: "Champagnat", icon: ShieldIcon },
     { to: `/torneo/${slug}/posiciones`, label: "Posiciones", icon: ListIcon },
     { to: `/ultimos-resultados?sport=${sport}`, label: "Resultados", icon: ResultsIcon },
   ];

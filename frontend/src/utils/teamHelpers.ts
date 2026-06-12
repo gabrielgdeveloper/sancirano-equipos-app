@@ -21,12 +21,26 @@ export function teamNameMatches(teamName: string, target: string): boolean {
  * Si se proporciona trackedTeamId, busca por ID exacto (necesario cuando hay 2+ equipos del mismo club).
  * Si no, busca por nombre.
  */
+function allTeams(championship: Championship): Team[] {
+  const fromRounds = championship.rounds.flatMap((r) =>
+    r.matches.flatMap((m) => [m.localTeam, m.visitTeam])
+  );
+  const seen = new Set<number>();
+  return [...championship.teams, ...fromRounds].filter((t) => {
+    if (seen.has(t.id)) return false;
+    seen.add(t.id);
+    return true;
+  });
+}
+
 export function findTrackedTeam(championship: Championship, trackedTeamName: string, trackedTeamId?: number): Team | null {
+  const teams = allTeams(championship);
   if (trackedTeamId != null) {
-    return championship.teams.find((t) => t.id === trackedTeamId) ?? null;
+    const byId = teams.find((t) => t.id === trackedTeamId);
+    if (byId) return byId;
   }
   return (
-    championship.teams.find((t) =>
+    teams.find((t) =>
       teamNameMatches(t.club.name, trackedTeamName) || teamNameMatches(t.name, trackedTeamName)
     ) ?? null
   );

@@ -46,7 +46,7 @@ function TournamentResult({ tournament, data, isLoading, isError }: TournamentRe
         if (!trackedTeam) {
           return (
             <div className="bg-brand-700 rounded-xl p-4 text-center text-gray-500 text-sm">
-              San Cirano no encontrado
+              Champagnat no encontrado
             </div>
           );
         }
@@ -98,7 +98,7 @@ export function LastResultsPage() {
       <div>
         <h1 className="text-2xl font-bold text-white">Últimos Resultados — {sportLabel}</h1>
         <p className="text-gray-400 mt-1">
-          Último partido jugado por San Cirano en cada división
+          Último partido jugado por Champagnat en cada división
           {loadingCount > 0 && (
             <span className="ml-2 text-xs text-gray-600">
               — cargando {loadingCount}...

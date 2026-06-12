@@ -84,14 +84,17 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                       {zone.label}
                     </span>
                   )}
-                  {!zone && showPromotion && row.position === 1 && (
+                  {/* {!zone && showPromotion && row.position === 1 && (
                     <span className="text-[9px] font-semibold text-emerald-400 uppercase leading-none">Ascenso</span>
-                  )}
+                  )} */}
                   {!zone && showGanador && row.position >= 1 && row.position <= ganadorLimit && (
                     <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Ganadores</span>
                   )}
-                  {!zone && ((showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (
+                  {!zone && ((showPromotion && row.position >= 1 && row.position <= 4) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (
                     <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Playoff</span>
+                  )}
+                    {!zone && ((showPromotion && row.position >= 13 && row.position <= 15) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (
+                    <span className="text-[9px] font-semibold text-red-400 uppercase leading-none">Descenso</span>
                   )}
                 </div>
               </td>

@@ -8,11 +8,12 @@ import { getMatchResult } from "@/utils/teamHelpers";
 interface TeamSummaryCardProps {
   stats: TeamStats;
   tournamentSlug: string;
+  detailSlug?: string;
   trackedTeamName?: string;
   showHorarioInvertido?: boolean;
 }
 
-export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName, showHorarioInvertido = false }: TeamSummaryCardProps) {
+export function TeamSummaryCard({ stats, tournamentSlug, detailSlug, trackedTeamName, showHorarioInvertido = false }: TeamSummaryCardProps) {
   const { team, standing, lastMatch, nextMatch } = stats;
   const displayName = trackedTeamName ?? team.club.name;
 
@@ -80,7 +81,7 @@ export function TeamSummaryCard({ stats, tournamentSlug, trackedTeamName, showHo
 
       {/* CTA */}
       <Link
-        to={`/torneo/${tournamentSlug}/equipo/san-cirano`}
+        to={`/torneo/${detailSlug ?? tournamentSlug}/equipo/san-cirano`}
         className="text-center text-sm font-medium text-brand-400 hover:text-brand-300 transition-colors py-1"
       >
         Ver detalle completo →

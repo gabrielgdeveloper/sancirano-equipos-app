@@ -12,7 +12,7 @@ export function useTournamentData(tournament: TournamentConfig | undefined) {
     queryKey: ["tournament", tournament?.slug],
     queryFn: () => {
       if (!tournament) throw new Error("Torneo no encontrado");
-      return provider.getChampionship(tournament.id, tournament.trackedTeamName, tournament.trackedTeamId);
+      return provider.getChampionship(tournament.id, tournament.trackedTeamName, tournament.trackedTeamId, tournament.trackedTeams);
     },
     enabled: !!tournament,
     staleTime: STALE_TIME,

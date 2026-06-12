@@ -4,7 +4,7 @@ import { mapStandingsResponse } from "@/services/mappers/standingsMapper";
 import type { TournamentDataProvider, TournamentDataResult } from "./TournamentDataProvider";
 
 export class HockeyTournamentDataProvider implements TournamentDataProvider {
-  async getChampionship(id: number, trackedTeamName: string, trackedTeamId?: number): Promise<TournamentDataResult> {
+  async getChampionship(id: number, trackedTeamName: string, trackedTeamId?: number, trackedTeams?: Array<{ name: string; id?: number }>): Promise<TournamentDataResult> {
     const [championshipResponse, positionsResponse] = await Promise.all([
       fetchHockeyChampionship(id),
       fetchHockeyPositions(id),
@@ -12,7 +12,7 @@ export class HockeyTournamentDataProvider implements TournamentDataProvider {
 
     return {
       championship: mapChampionshipResponse(championshipResponse),
-      standings: mapStandingsResponse(positionsResponse, trackedTeamName, trackedTeamId),
+      standings: mapStandingsResponse(positionsResponse, trackedTeamName, trackedTeamId, trackedTeams),
       source: (positionsResponse as any).source ?? "api",
       lastSync: (positionsResponse as any).lastSync ?? null,
     };

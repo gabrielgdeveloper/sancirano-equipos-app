@@ -8,7 +8,7 @@ import type { TournamentDataProvider, TournamentDataResult } from "./TournamentD
  * Sin caché persistente — siempre datos frescos.
  */
 export class ApiTournamentDataProvider implements TournamentDataProvider {
-  async getChampionship(id: number, trackedTeamName: string, trackedTeamId?: number): Promise<TournamentDataResult> {
+  async getChampionship(id: number, trackedTeamName: string, trackedTeamId?: number, trackedTeams?: Array<{ name: string; id?: number }>): Promise<TournamentDataResult> {
     const [championshipResponse, positionsResponse] = await Promise.all([
       fetchChampionship(id),
       fetchPositions(id),
@@ -16,7 +16,7 @@ export class ApiTournamentDataProvider implements TournamentDataProvider {
 
     return {
       championship: mapChampionshipResponse(championshipResponse),
-      standings: mapStandingsResponse(positionsResponse, trackedTeamName, trackedTeamId),
+      standings: mapStandingsResponse(positionsResponse, trackedTeamName, trackedTeamId, trackedTeams),
       source: "api",
       lastSync: null,
     };

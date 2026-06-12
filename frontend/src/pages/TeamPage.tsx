@@ -35,7 +35,7 @@ export function TeamPage() {
     return (
       <EmptyState
         title="Equipo no encontrado"
-        message={`San Cirano no fue encontrado en el torneo ${data.championship.name}.`}
+        message={`Champagnat no fue encontrado en el torneo ${data.championship.name}.`}
       />
     );
   }

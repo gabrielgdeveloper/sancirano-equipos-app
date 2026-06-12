@@ -16,7 +16,7 @@ export function Navbar({ currentTournament }: NavbarProps) {
   const slugLinks = slug
     ? [
         { to: `/torneo/${slug}`, label: "Inicio" },
-        { to: `/torneo/${slug}/equipo/san-cirano`, label: "San Cirano" },
+        { to: `/torneo/${slug}/equipo/san-cirano`, label: "Champagnat" },
         { to: `/torneo/${slug}/posiciones`, label: "Posiciones" },
       ]
     : [];
@@ -29,7 +29,7 @@ export function Navbar({ currentTournament }: NavbarProps) {
           {/* Logo / Brand */}
           <Link to="/" className="flex items-center gap-2 flex-shrink-0">
             <span className="text-lg font-bold text-white leading-tight">
-              San Cirano
+              Champagnat
               <span className="text-brand-400 ml-1">Sports Hub</span>
             </span>
           </Link>

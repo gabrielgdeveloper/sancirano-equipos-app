@@ -21,7 +21,7 @@ export function Layout() {
     return (savedSlug ? getTournamentBySlug(savedSlug) : undefined) ?? defaultTournament;
   })();
 
-  useFavicon(currentTournament ?? defaultTournament);
+  useFavicon();
 
   return (
     <div className="min-h-screen w-full bg-brand-900 text-white">
@@ -30,7 +30,7 @@ export function Layout() {
         <Outlet />
       </main>
       <footer className="border-t border-brand-600 mt-16 py-6 pb-24 sm:pb-6 text-center text-xs text-brand-400/50">
-        San Cirano Sports Hub 2026 — Datos: api.urba.org.ar y api.tournamenttracker.buenosaireshockey.ar
+        Champagnat Sports Hub 2026 — Datos: api.urba.org.ar y api.tournamenttracker.buenosaireshockey.ar
       </footer>
       <BottomNav currentTournament={fallbackTournament} />
     </div>

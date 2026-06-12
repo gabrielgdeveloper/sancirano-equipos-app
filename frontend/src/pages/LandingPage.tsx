@@ -13,7 +13,7 @@ export function LandingPage() {
         {/* Title */}
         <div>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            San Cirano{" "}
+            Champagnat{" "}
             <span className="text-brand-400">Sports Hub</span>
           </h1>
           <p className="mt-4 text-lg sm:text-xl text-gray-400 max-w-md mx-auto">
