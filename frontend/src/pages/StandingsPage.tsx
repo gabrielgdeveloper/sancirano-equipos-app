@@ -30,7 +30,7 @@ export function StandingsPage() {
       </div>
 
       {standings.length > 0 ? (
-        <StandingsTable standings={standings} compact={false} zones={tournamentConfig?.zones} showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a"} />
+        <StandingsTable standings={standings} compact={false} zones={tournamentConfig?.zones} showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a" || slug === "m15-a"} ganadorLimit={slug === "m15-a" ? 4 : 6} />
       ) : (
         <p className="text-gray-500 text-center py-12">No hay posiciones disponibles.</p>
       )}

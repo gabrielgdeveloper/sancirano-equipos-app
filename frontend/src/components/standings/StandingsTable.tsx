@@ -9,6 +9,7 @@ interface StandingsTableProps {
   showPromotion?: boolean;
   showPlayoff?: boolean;
   showGanador?: boolean;
+  ganadorLimit?: number;
   zones?: ZoneConfig[];
 }
 
@@ -30,7 +31,7 @@ function getZone(zones: ZoneConfig[] | undefined, position: number): ZoneConfig 
   return zones?.find((z) => z.positions.includes(position));
 }
 
-export function StandingsTable({ standings, compact = false, showPromotion = false, showPlayoff = false, showGanador = false, zones }: StandingsTableProps) {
+export function StandingsTable({ standings, compact = false, showPromotion = false, showPlayoff = false, showGanador = false, ganadorLimit = 6, zones }: StandingsTableProps) {
   return (
     <div className="overflow-x-auto rounded-xl border border-brand-600">
       <table className="w-full text-sm">
@@ -68,7 +69,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                   ? `${zoneBorderClass[zone.color]} hover:bg-brand-700`
                   : showPromotion && row.position === 1
                   ? "border-l-emerald-500 hover:bg-brand-700"
-                  : showGanador && row.position >= 1 && row.position <= 6
+                  : showGanador && row.position >= 1 && row.position <= ganadorLimit
                   ? "border-l-yellow-500 hover:bg-brand-700"
                   : (showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)
                   ? "border-l-yellow-500 hover:bg-brand-700"
@@ -86,7 +87,7 @@ export function StandingsTable({ standings, compact = false, showPromotion = fal
                   {!zone && showPromotion && row.position === 1 && (
                     <span className="text-[9px] font-semibold text-emerald-400 uppercase leading-none">Ascenso</span>
                   )}
-                  {!zone && showGanador && row.position >= 1 && row.position <= 6 && (
+                  {!zone && showGanador && row.position >= 1 && row.position <= ganadorLimit && (
                     <span className="text-[9px] font-semibold text-yellow-400 uppercase leading-none">Ganadores</span>
                   )}
                   {!zone && ((showPromotion && row.position >= 2 && row.position <= 5) || (showPlayoff && row.position >= 1 && row.position <= 4)) && (

@@ -137,7 +137,7 @@ export function HomePage() {
               Ver completa →
             </a>
           </div>
-          <StandingsTable standings={standings} compact zones={getTournamentBySlug(slug ?? "")?.zones} showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a"} />
+          <StandingsTable standings={standings} compact zones={getTournamentBySlug(slug ?? "")?.zones} showPromotion={slug === "primera"} showPlayoff={slug === "intermedia" || (slug?.startsWith("pre-intermedia") ?? false)} showGanador={slug === "m19-a" || slug === "m17-a" || slug === "m16-a" || slug === "m15-a"} ganadorLimit={slug === "m15-a" ? 4 : 6} />
         </section>
       )}
     </div>
